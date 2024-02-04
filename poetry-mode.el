@@ -103,10 +103,6 @@ If CALLBACK is non-nil, it is called with the process as an argument when the co
   "Return non-nil if the current buffer is in a poetry project."
   (stringp (poetry-mode-project-dir)))
 
-(defun poetry-mode--venv-dir ()
-  "Return the directory of the virtualenv associated with the current project."
-  )
-
 (defun poetry-mode-venv-activate ()
   "Activate the virtualenv associated with the current project."
   (interactive)
