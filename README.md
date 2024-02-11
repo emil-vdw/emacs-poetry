@@ -7,5 +7,11 @@ A Poetry porcelain for Emacs.
 
 ```elisp
 (use-package poetry-mode
-  :quelpa (poetry-mode :fetcher github :repo "emil-vdw/emacs-poetry"))
+  :quelpa (poetry-mode :fetcher github :repo "emil-vdw/emacs-poetry")
+  :bind (("C-c m" . poetry-transient)))
 ```
+
+## Features
+
+- Activate/deactivate poetry environment.
+- Jump to `pyproject.toml` file.
