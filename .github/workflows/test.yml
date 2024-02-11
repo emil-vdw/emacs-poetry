@@ -37,4 +37,5 @@ jobs:
         version: ${{ matrix.emacs-version }}
 
     - name: Run tests
-      run: ./tests/test.sh
+      run: ./test.sh
+      working-directory: ./tests
