@@ -74,10 +74,9 @@
    [:description
     "Environment"
     ("a" "Activate" poetry-venv-activate
-     :inapt-if-not
-     poetry-project--root
-     :inapt-if-non-nil
-     poetry-active-project)
+     :inapt-if
+     (lambda () (or poetry-active-project
+                    (not (poetry-project--root)))))
     
     ("d" "Deactivate" poetry-venv-deactivate
      :inapt-if-nil
@@ -86,6 +85,11 @@
    [:description
     "Project"
     ("f" "Jump to pyproject.toml file" poetry-project--goto-pyproject-file
+     :inapt-if-not (lambda ()
+                     (or poetry-active-project
+                         (poetry-project--root))))
+
+    ("p" "Open project root directory" poetry-project--goto-pyproject-root
      :inapt-if-not (lambda ()
                      (or poetry-active-project
                          (poetry-project--root))))]])

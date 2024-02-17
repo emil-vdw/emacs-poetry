@@ -44,6 +44,13 @@ PROJECT-ROOT is the root directory of the project."
           (match-string 1)
         (error "Project name not found")))))
 
+(defun poetry-project--goto-pyproject-root (&optional project-root)
+  "Open the root directory of the current project in dired."
+  (interactive)
+  (when-let* ((project-root
+               (or project-root (poetry-project--root))))
+    (dired project-root)))
+
 (defun poetry-project--goto-pyproject-file (&optional project-root)
   "Open the pyproject.toml file in the current project.
 
