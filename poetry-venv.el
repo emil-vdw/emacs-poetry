@@ -69,7 +69,10 @@ and adds the virtualenv bin directory to the PATH. It also sets
             (project-dir . ,project-dir)
             (venv-path . ,venv-path)
             (venv-name . ,(file-name-nondirectory venv-path))
-            (venv-bin . ,venv-bin-dir)))))
+            (venv-bin . ,venv-bin-dir)))
+
+    (when (eglot-managed-p)
+      (eglot-reconnect (eglot--current-server-or-lose)))))
 
 (defun poetry-venv-deactivate ()
   "Deactivate the virtualenv associated with the current project.
@@ -97,7 +100,10 @@ removes the virtualenv bin directory from the PATH. It also sets
     ;; Remove the virtualenv from the exec-path.
     (setq exec-path (remove venv-bin-dir exec-path))
 
-    (setq poetry-active-project nil)))
+    (setq poetry-active-project nil))
+
+  (when (eglot-managed-p)
+      (eglot-reconnect (eglot--current-server-or-lose))))
 
 
 (provide 'poetry-venv)
