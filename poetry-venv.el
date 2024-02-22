@@ -14,6 +14,12 @@
     ("VIRTUAL_ENV" . nil))
   "The base environment variables to be set when activating a virtualenv.")
 
+(defun poetry-eglot-reconnect ()
+  "Reconnect to the eglot server."
+  (interactive)
+  (when (eglot-managed-p)
+    (eglot-reconnect (eglot--current-server-or-lose))))
+
 (defun poetry--venv-path ()
   "Return the path to the virtualenv associated with the current project."
   (save-match-data
@@ -71,8 +77,7 @@ and adds the virtualenv bin directory to the PATH. It also sets
             (venv-name . ,(file-name-nondirectory venv-path))
             (venv-bin . ,venv-bin-dir)))
 
-    (when (eglot-managed-p)
-      (eglot-reconnect (eglot--current-server-or-lose)))))
+    (poetry-eglot-reconnect)))
 
 (defun poetry-venv-deactivate ()
   "Deactivate the virtualenv associated with the current project.
@@ -102,8 +107,7 @@ removes the virtualenv bin directory from the PATH. It also sets
 
     (setq poetry-active-project nil))
 
-  (when (eglot-managed-p)
-      (eglot-reconnect (eglot--current-server-or-lose))))
+  (poetry-eglot-reconnect))
 
 
 (provide 'poetry-venv)

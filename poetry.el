@@ -80,7 +80,10 @@
     
     ("d" "Deactivate" poetry-venv-deactivate
      :inapt-if-nil
-     poetry-active-project)]
+     poetry-active-project)
+
+    ("r" "Egot reconnect" poetry-eglot-reconnect
+     :inapt-if-not eglot-managed-p)]
 
    [:description
     "Project"
