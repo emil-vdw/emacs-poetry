@@ -48,7 +48,7 @@ PROJECT-ROOT is the root directory of the project."
   "Open the root directory of the current project in dired."
   (interactive)
   (when-let* ((project-root
-               (or project-root (poetry-project--root))))
+               (or project-root (alist-get 'project-dir poetry-active-project))))
     (dired project-root)))
 
 (defun poetry-project--goto-pyproject-file (&optional project-root)
@@ -58,7 +58,7 @@ If PROJECT-ROOT is nil, defaults to the project for the current working
 directory. If no project is found, do nothing."
   (interactive)
   (when-let* ((project-root
-               (or project-root (poetry-project--root)))
+               (or project-root (alist-get 'project-dir poetry-active-project)))
               (pyproject-file (concat project-root "pyproject.toml")))
     (find-file pyproject-file)))
 
