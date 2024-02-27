@@ -82,7 +82,7 @@
      :inapt-if-nil
      poetry-active-project)
 
-    ("r" "Egot reconnect" poetry-eglot-reconnect
+    ("r" "Eglot reconnect" poetry-eglot-reconnect
      :inapt-if-not eglot-managed-p)]
 
    [:description
