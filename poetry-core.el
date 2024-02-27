@@ -57,40 +57,6 @@
   (shell-command-to-string
    (format "%s %s" poetry-command (s-join " " args))))
 
-(defun poetry--run-command-async (args)
-  ""
-  (let ((poetry-command-buffer (get-buffer-create poetry-output-buffer)))
-    (with-current-buffer poetry-command-buffer
-      
-      (display-buffer poetry-command-buffer)
-      (read-only-mode -1) ;; Disable read-only mode to clear the buffer
-      (erase-buffer)      ;; Clear the buffer
-
-      (async-shell-command
-       (concat
-        "poetry"
-        " "
-        (shell-quote-argument
-         (s-join " " args)))
-       poetry-output-buffer)
-      
-      ;; (make-process :name "poetry-command"
-      ;;               :buffer poetry-output-buffer
-      ;;               :command (list
-      ;;                         "poetry"
-      ;;                         (shell-quote-argument
-      ;;                          (s-join " " args)))
-      ;;               :coding 'ascii
-      ;;               ;; :sentinel
-      ;;               ;; (lambda (process event)
-      ;;               ;;   (with-current-buffer (process-buffer process)
-      ;;               ;;     (poetry-output-mode 1)  ;; Activate poetry-output-mode
-      ;;               ;;     (read-only-mode 1)     ;; Make the buffer read-only
-      ;;               ;;     ))
-      ;;               )
-      )))
-
-
 (defun poetry-mode--run-command (command-list &optional project-dir callback)
   "Run a Poetry command COMMAND-LIST asynchronously in the PROJECT-DIR directory.
 If CALLBACK is non-nil, it is called with the process as an argument when the command finishes."
