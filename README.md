@@ -13,6 +13,8 @@ want to activate/deactivate the virtualenv, jump to the
 
 ## Features
 
+![2024-02-29-115149](https://github.com/emil-vdw/emacs-poetry/assets/33003253/f2d9c3e4-39db-4be7-adba-387b36df6f2a)
+
 - Activate/deactivate poetry environment.
 - Jump to the active project's `pyproject.toml` file.
 - Jump to the active project's directory.
