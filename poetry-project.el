@@ -9,6 +9,10 @@
 ;; This library implements project related functionality for poetry-mode.
 
 ;;; Code:
+
+;;; TODO
+;;; - Show package mode info in transient
+
 (defvar poetry-active-project nil
   "The attributes of the active poetry project.")
 
@@ -36,13 +40,15 @@ Path returned is in the form \\\"/path/to/project\\\" (without a trailing slash)
   "Return the name of the current poetry project.
 
 PROJECT-ROOT is the root directory of the project."
-  (let ((pyproject-file (concat project-root "/" "pyproject.toml")))
+  (let ((pyproject-file (f-join project-root "pyproject.toml")))
     (with-temp-buffer
       (insert-file-contents pyproject-file)
       (goto-char (point-min))
       (if (re-search-forward "^name\\s-*=\\s-*\"\\(.*?\\)\"" nil t)
           (match-string 1)
-        (error "Project name not found")))))
+        ;; This is a non-package project (poetry >= 1.8 feature).
+        ;; TODO: Add an explicit check for "package-mode = false" or error.
+        (f-filename project-root)))))
 
 (defun poetry-project--goto-pyproject-root (&optional project-root)
   "Open the root directory of the current project in dired."

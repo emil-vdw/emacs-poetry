@@ -9,7 +9,8 @@
 ;; Package-Requires: (
 ;;     (emacs "29.2")
 ;;     (transient "0.5.3")
-;;     (dash "2.19.1"))
+;;     (dash "2.19.1")
+;;     (f "0.20.0"))
 
 ;;; Code:
 (require 'cl-lib)
