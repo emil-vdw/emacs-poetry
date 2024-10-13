@@ -9,6 +9,16 @@
 ;; This library implements a virtual environment manager for Poetry.
 
 ;;; Code:
+(defcustom poetry-venv-activated-hook '(poetry-eglot-reconnect)
+  "Hook run when a Poetry virtual environment is activated."
+  :type 'hook
+  :group 'poetry)
+
+(defcustom poetry-venv-deactivated-hook '(poetry-eglot-reconnect)
+  "Hook run when a Poetry virtual environment is deactivated."
+  :type 'hook
+  :group 'poetry)
+
 (defvar poetry-venv--original-env-vars
   `(("PYTHONHOME" . ,(getenv "PYTHONHOME"))
     ("VIRTUAL_ENV" . nil))
@@ -77,7 +87,7 @@ and adds the virtualenv bin directory to the PATH. It also sets
             (venv-name . ,(file-name-nondirectory venv-path))
             (venv-bin . ,venv-bin-dir)))
 
-    (poetry-eglot-reconnect)))
+    (run-hooks poetry-venv-activated-hook)))
 
 (defun poetry-venv-deactivate ()
   "Deactivate the virtualenv associated with the current project.
@@ -107,7 +117,7 @@ removes the virtualenv bin directory from the PATH. It also sets
 
     (setq poetry-active-project nil))
 
-  (poetry-eglot-reconnect))
+  (run-hooks poetry-venv-deactivated-hook))
 
 
 (provide 'poetry-venv)
