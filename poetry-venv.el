@@ -87,7 +87,7 @@ and adds the virtualenv bin directory to the PATH. It also sets
             (venv-name . ,(file-name-nondirectory venv-path))
             (venv-bin . ,venv-bin-dir)))
 
-    (run-hooks poetry-venv-activated-hook)))
+    (run-hooks 'poetry-venv-activated-hook)))
 
 (defun poetry-venv-deactivate ()
   "Deactivate the virtualenv associated with the current project.
@@ -117,7 +117,7 @@ removes the virtualenv bin directory from the PATH. It also sets
 
     (setq poetry-active-project nil))
 
-  (run-hooks poetry-venv-deactivated-hook))
+  (run-hooks 'poetry-venv-deactivated-hook))
 
 
 (provide 'poetry-venv)
